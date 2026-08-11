@@ -15,14 +15,14 @@ meta_description: Use the OpenSearch Agent Traces plugin to trace a multi-agent 
 
 Your multi-agent system is returning partial results. Users get trip recommendations without weather data, and you have no idea which sub-agent failed, what tool it tried to call, or how many requests were affected. In this post, we'll trace a failing multi-agent orchestration end-to-end using the Agent Traces plugin in OpenSearch Dashboards, drill into the exact tool execution error, and quantify the blast radius with a PPL aggregation query.
 
-This post is part of our [Observability Stack series](https://opensearch.org/blog/technical-posts/2026/06/diving-into-services-with-opensearch-and-opentelemetry/). If you haven't set up the stack yet, check the first post for instructions.
+This post is part of our [Observability Stack series](https://opensearch.org/blog/single-pane-of-glass-for-all-your-telemetry-the-opensearch-observability-stack/). If you haven't set up the stack yet, check the first post for instructions.
 
 ## Setting up the demo
 
-We use the [Observability Stack](https://github.com/aws-observability/observability-stack) with its built-in multi-agent travel planner example. The travel planner is an orchestrator agent that fans out to sub-agents (weather-agent, events-agent) and calls tools (flights, currency) via an MCP server. All services are instrumented with the [OpenSearch GenAI Observability SDK](https://github.com/opensearch-project/genai-observability-sdk-py) using OpenTelemetry GenAI semantic conventions.
+We use the [Observability Stack](https://github.com/opensearch-project/observability-stack) with its built-in multi-agent travel planner example. The travel planner is an orchestrator agent that fans out to sub-agents (weather-agent, events-agent) and calls tools (flights, currency) via an MCP server. All services are instrumented with the [OpenSearch GenAI Observability SDK](https://github.com/opensearch-project/genai-observability-sdk-py) using OpenTelemetry GenAI semantic conventions.
 
 ```bash
-git clone https://github.com/aws-observability/observability-stack.git
+git clone https://github.com/opensearch-project/observability-stack.git
 cd observability-stack
 docker compose up -d
 ```
@@ -114,7 +114,7 @@ The chart confirms: weather-agent accounts for the majority of errors (both `exe
 
 ## What's next
 
-- **Try it yourself**: Clone the [Observability Stack](https://github.com/aws-observability/observability-stack), start the stack, and inject faults via the control panel at http://localhost:8085.
+- **Try it yourself**: Clone the [Observability Stack](https://github.com/opensearch-project/observability-stack), start the stack, and inject faults via the control panel at http://localhost:8085.
 - **Explore the Trace Map**: The Agent Traces flyout includes a DAG visualization (Trace Map tab) showing the execution flow as a directed graph with color-coded nodes.
 - **Instrument your own agents**: Add the [OpenSearch GenAI Observability SDK](https://github.com/opensearch-project/genai-observability-sdk-py) to your Python agents for automatic span creation with GenAI semantic conventions.
 
